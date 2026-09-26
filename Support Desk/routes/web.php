@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
+use App\Models\Ticket;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,10 +27,14 @@ Route::get('/profile', function () {
 
 Route::get('/tickets', function () {
     $page = 'tickets';
-    return view('home', compact('page'));
+    $tickets = Ticket::all();
+    return view('home', compact('page', 'tickets'));
 });
 
 Route::get('/users', function () {
     $page = 'users';
     return view('home', compact('page'));
 });
+
+//ticket creation route
+Route::post('/create-tickets', [TicketController::class, 'createTicket']);

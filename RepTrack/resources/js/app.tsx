@@ -1,40 +1,55 @@
-import { createInertiaApp } from '@inertiajs/react';
-import { Toaster } from '@/components/ui/sonner';
-import { TooltipProvider } from '@/components/ui/tooltip';
-import { initializeTheme } from '@/hooks/use-appearance';
-import AppLayout from '@/layouts/app-layout';
-import AuthLayout from '@/layouts/auth-layout';
-import SettingsLayout from '@/layouts/settings/layout';
+import { Navigate, Route, Routes } from 'react-router-dom'
+import { useAuth } from './context/AuthContext'
+import ProtectedRoute from './components/ProtectedRoute'
+import Home from './pages/Home'
+import Login from './pages/Login'
+import Workouts from './pages/Workouts'
+import Progress from './pages/Progress'
+import CustomWorkout from './pages/CustomWorkout'
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const App = () => {
+  const { isAuthenticated } = useAuth()
 
-createInertiaApp({
-    title: (title) => (title ? `${title} - ${appName}` : appName),
-    layout: (name) => {
-        switch (true) {
-            case name === 'welcome':
-                return null;
-            case name.startsWith('auth/'):
-                return AuthLayout;
-            case name.startsWith('settings/'):
-                return [AppLayout, SettingsLayout];
-            default:
-                return AppLayout;
-        }
-    },
-    strictMode: true,
-    withApp(app) {
-        return (
-            <TooltipProvider delayDuration={0}>
-                {app}
-                <Toaster />
-            </TooltipProvider>
-        );
-    },
-    progress: {
-        color: '#4B5563',
-    },
-});
+  return (
+    <Routes>
+      <Route path="/" element={<Navigate to={isAuthenticated ? '/home' : '/login'} replace />} />
+      <Route path="/login" element={isAuthenticated ? <Navigate to="/home" replace /> : <Login />} />
+      <Route
+        path="/home"
+        element={(
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        )}
+      />
+      <Route
+        path="/workouts"
+        element={(
+          <ProtectedRoute>
+            <Workouts />
+          </ProtectedRoute>
+        )}
+      />
+      <Route
+        path="/progress"
+        element={(
+          <ProtectedRoute>
+            <Progress />
+          </ProtectedRoute>
+        )}
+      />
+      <Route
+        path="/custom-workout"
+        element={(
+          <ProtectedRoute>
+            <CustomWorkout />
+          </ProtectedRoute>
+        )}
+      />
+      <Route path="/pr" element={<Navigate to="/progress" replace />} />
+      <Route path="*" element={<Navigate to={isAuthenticated ? '/home' : '/login'} replace />} />
+    </Routes>
+  )
+}
 
-// This will set light / dark mode on load...
-initializeTheme();
+export default App

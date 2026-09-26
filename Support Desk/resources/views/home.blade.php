@@ -11,19 +11,19 @@
 
 <body>
     @auth
-        <div class="flex">
-            <div class="flex h-screen overflow-hidden">
+        <div class="grid grid-flow-col w-full position-relative">
+            <div class="col-span-1 h-screen overflow-hidden">
                 <x-sidebar />
             </div>
-            <section class="p-6 w-1/2">
-                <h1 class="text-5xl font-bold m-6">
+            <div class="col-span-8 p-6">
+                <h1 class="text-4xl font-bold m-6">
                     {{ isset($page) ? ucfirst($page) : 'Dashboard' }}
                 </h1>
                 @isset($page)
                     @include($page)
 
                 @endisset
-            </section>
+            </div>
         </div>
 
     @else

@@ -1,0 +1,48 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
+    "types": [
+      "vite/client"
+    ],
+    "skipLibCheck": true,
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": [
+    "resources/js/App.tsx",
+    "resources/js/main.tsx",
+    "resources/js/components/AddExerciseModal.tsx",
+    "resources/js/components/BackButton.tsx",
+    "resources/js/components/Navbar.tsx",
+    "resources/js/components/ProtectedRoute.tsx",
+    "resources/js/context/AuthContext.tsx",
+    "resources/js/context/ProgramContext.tsx",
+    "resources/js/pages/CustomWorkout.tsx",
+    "resources/js/pages/Home.tsx",
+    "resources/js/pages/Login.tsx",
+    "resources/js/pages/Progress.tsx",
+    "resources/js/pages/Workouts.tsx",
+    "resources/js/services/api.ts",
+    "resources/js/types/index.ts"
+  ]
+}

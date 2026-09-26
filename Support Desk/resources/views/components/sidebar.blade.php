@@ -1,4 +1,4 @@
-<aside class="w-48 h-full bg-gray-800 text-white flex flex-col flex-shrink-0">
+<aside class="w-full h-full bg-gray-800 text-white flex flex-col flex-shrink-0 psotition-absolute z-10">
     <div class="flex flex-col h-full justify-between">
         <div class="flex flex-col p-6">
             <div class="flex flex-col">

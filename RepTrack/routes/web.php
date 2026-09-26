@@ -2,10 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::inertia('/', 'welcome')->name('home');
-
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::inertia('dashboard', 'dashboard')->name('dashboard');
-});
-
-require __DIR__.'/settings.php';
+// Every non-API route serves the same Blade shell; React Router takes it
+// from there (/login, /home, /workouts, /progress, /custom-workout, etc.).
+Route::get('/{any}', function () {
+    return view('app');
+})->where('any', '^(?!api).*$');
